@@ -19,6 +19,9 @@ struct HomeScreen: View {
     
     func heading( ) -> some View {
         Text("Network Calls and Logging in KMM")
+            .padding()
+            .font(.largeTitle)
+            .multilineTextAlignment(.center)
     }
     
     
@@ -27,32 +30,37 @@ struct HomeScreen: View {
             
             Button("REST Requests" ) {
                 print("Button pressed")
-            }.padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.yellow.cornerRadius(8))
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color.yellow.cornerRadius(8))
             
             
             Button("Socket Requests" ) {
                 print("Button pressed")
-            }.padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.yellow.cornerRadius(8))
-
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color.yellow.cornerRadius(8))
+            
             
             Button("Server Sent Events" ) {
                 print("Button pressed")
-            }.padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.yellow.cornerRadius(8))
-
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color.yellow.cornerRadius(8))
+            
             
             Button("GraphQl Requests" ) {
                 print("Button pressed")
-            }.padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.yellow.cornerRadius(8))
-
-        }.padding()
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color.yellow.cornerRadius(8))
+            
+        }
+        .padding()
     }
 }
 
