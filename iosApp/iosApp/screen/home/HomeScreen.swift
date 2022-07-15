@@ -64,7 +64,7 @@ struct HomeScreen: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {
         HomeScreen()
     }

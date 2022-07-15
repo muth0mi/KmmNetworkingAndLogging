@@ -1,25 +1,20 @@
 package app.kmmchat.android.screen.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import app.kmmchat.Greeting
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import app.kmmchat.android.ui.theme.KMM_ChatTheme
-
-fun greet(): String {
-    return Greeting().greeting()
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+internal fun HomeScreen(navController: NavHostController) {
 
     Scaffold() {
         Column(
@@ -42,7 +37,7 @@ fun HomeScreen() {
 }
 
 @Composable
-fun Heading(modifier: Modifier = Modifier) {
+private fun Heading(modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -58,7 +53,7 @@ fun Heading(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ActionButtons(modifier: Modifier = Modifier) {
+private fun ActionButtons(modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(24.dp),
@@ -84,8 +79,8 @@ fun ActionButtons(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview() {
+private fun HomeScreenPreview() {
     KMM_ChatTheme {
-        HomeScreen()
+        HomeScreen(rememberNavController())
     }
 }
