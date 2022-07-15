@@ -5,10 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.kmmchat.FeedRepository
+import app.kmmchat.data.FeedRepositoryImpl
 import kotlinx.coroutines.launch
 
 class NewPostViewModel(
-    private val feedRepository: FeedRepository = FeedRepository()
+    private val feedRepository: FeedRepository = FeedRepositoryImpl()
 ) : ViewModel() {
 
     var postSent: MutableState<Boolean> = mutableStateOf(false)

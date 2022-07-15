@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.kmmchat.FeedItem
 import app.kmmchat.FeedRepository
+import app.kmmchat.data.FeedRepositoryImpl
 import kotlinx.coroutines.launch
 
 class FeedViewModel(
-    private val feedRepository: FeedRepository = FeedRepository()
+    private val feedRepository: FeedRepository = FeedRepositoryImpl()
 ) : ViewModel() {
 
     var navigateBack: MutableState<Boolean> = mutableStateOf(false)

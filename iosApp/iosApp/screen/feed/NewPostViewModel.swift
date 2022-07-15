@@ -5,7 +5,7 @@ class NewPostViewModel : ObservableObject {
     
     var feedRepository : FeedRepository
     
-    init(feedRepository: FeedRepository = .init() ){
+    init(feedRepository: FeedRepositoryImpl = .init() ){
         self.feedRepository = feedRepository
     }
     

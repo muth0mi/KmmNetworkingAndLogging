@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":shared"))
+    implementation(projects.shared)
     // UI
     implementation("androidx.compose.ui:ui:1.1.1")
     implementation("androidx.compose.ui:ui-tooling-preview:1.1.1")
