@@ -5,7 +5,7 @@ class FeedViewModel : ObservableObject {
     
     var feedRepository : FeedRepository
     
-    init(feedRepository: FeedRepositoryImpl = .init() ){
+    init(feedRepository: FeedRepository = FeedRepositoryImpl.init(feedApi: FeedApi()) ){
         self.feedRepository = feedRepository
         self.refreshFeedItems()
     }

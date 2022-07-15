@@ -4,7 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.kmmchat.FeedRepository
+import app.kmmchat.domain.FeedRepository
 import app.kmmchat.data.FeedRepositoryImpl
 import kotlinx.coroutines.launch
 
