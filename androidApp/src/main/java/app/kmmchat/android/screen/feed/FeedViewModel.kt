@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.kmmchat.FeedItem
 import app.kmmchat.FeedRepository
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class FeedViewModel(
@@ -41,7 +40,13 @@ class FeedViewModel(
     fun refreshFeedItems() = viewModelScope.launch {
         error.value = null
         refreshingFeedItems.value = true
-        feedItems.value = feedRepository.getFeedItems()
+        kotlin.runCatching {
+            feedRepository.getFeedItems()
+        }.onSuccess {
+            feedItems.value = it
+        }.onFailure {
+            error.value = it.localizedMessage
+        }
         refreshingFeedItems.value = false
     }
 

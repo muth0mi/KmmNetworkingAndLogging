@@ -5,9 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.kmmchat.FeedRepository
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 class NewPostViewModel(
     private val feedRepository: FeedRepository = FeedRepository()
@@ -39,11 +37,12 @@ class NewPostViewModel(
     fun postNewFeed() = viewModelScope.launch {
         setErrorMessage(null)
         postingFeed.value = true
-        feedRepository.postToFeed(newPostText.value)
-        if (Random.nextBoolean()) {
+        kotlin.runCatching {
+            feedRepository.postToFeed(newPostText.value)
+        }.onSuccess {
             setPostSentSuccessfully(true)
-        } else {
-            setErrorMessage("Some Error")
+        }.onFailure {
+            setErrorMessage(it.localizedMessage)
         }
         postingFeed.value = false
     }
