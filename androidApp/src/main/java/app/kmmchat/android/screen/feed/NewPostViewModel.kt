@@ -4,11 +4,14 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.kmmchat.FeedRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
-class NewPostViewModel : ViewModel() {
+class NewPostViewModel(
+    private val feedRepository: FeedRepository = FeedRepository()
+) : ViewModel() {
 
     var postSent: MutableState<Boolean> = mutableStateOf(false)
 
@@ -38,6 +41,7 @@ class NewPostViewModel : ViewModel() {
 
         postingFeed.value = true
         delay(2000)
+        feedRepository.postToFeed(newPostText.value)
         if (Random.nextBoolean()) {
             setPostSentSuccessfully(true)
         } else {

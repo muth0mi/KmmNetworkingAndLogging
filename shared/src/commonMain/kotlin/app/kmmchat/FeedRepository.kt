@@ -9,4 +9,7 @@ class FeedRepository {
             FeedItem("C", "a"),
         )
     }
+
+    fun postToFeed(post:  String) {
+    }
 }

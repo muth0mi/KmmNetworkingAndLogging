@@ -9,7 +9,9 @@ import app.kmmchat.FeedRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class FeedViewModel : ViewModel() {
+class FeedViewModel(
+    private val feedRepository: FeedRepository = FeedRepository()
+) : ViewModel() {
 
     var navigateBack: MutableState<Boolean> = mutableStateOf(false)
 
@@ -38,7 +40,7 @@ class FeedViewModel : ViewModel() {
     fun refreshFeedItems() = viewModelScope.launch {
         refreshingFeedItems.value = true
         delay(2500)
-        feedItems.value = FeedRepository().getFeedItems()
+        feedItems.value = feedRepository.getFeedItems()
         refreshingFeedItems.value = false
     }
 
