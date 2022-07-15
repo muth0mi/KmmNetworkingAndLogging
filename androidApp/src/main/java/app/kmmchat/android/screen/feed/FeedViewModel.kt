@@ -34,10 +34,12 @@ class FeedViewModel(
     }
 
 
+    var error: MutableState<String?> = mutableStateOf(null)
     var feedItems: MutableState<List<FeedItem>> = mutableStateOf(emptyList())
     var refreshingFeedItems: MutableState<Boolean> = mutableStateOf(false)
 
     fun refreshFeedItems() = viewModelScope.launch {
+        error.value = null
         refreshingFeedItems.value = true
         feedItems.value = feedRepository.getFeedItems()
         refreshingFeedItems.value = false

@@ -12,11 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import app.kmmchat.android.ui.theme.KMM_ChatTheme
-import androidx.lifecycle.viewmodel.compose.viewModel
 import app.kmmchat.FeedItem
+import app.kmmchat.android.ui.theme.KMM_ChatTheme
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
@@ -52,7 +52,16 @@ internal fun FeedScreen(navController: NavHostController, viewModel: FeedViewMod
                 .fillMaxSize()
                 .padding(it)
         ) {
-            FeedList(viewModel, modifier = Modifier.padding(12.dp))
+
+            if (!viewModel.error.value.isNullOrBlank()) {
+                Text(
+                    text = viewModel.error.value.orEmpty(),
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.padding(24.dp)
+                )
+            } else {
+                FeedList(viewModel, modifier = Modifier.padding(12.dp))
+            }
         }
     }
 }
