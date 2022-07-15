@@ -2,18 +2,29 @@ import SwiftUI
 import shared
 
 struct HomeScreen: View {
+    
+    @StateObject var viewModel : HomeViewModel
+    
+    init(viewModel: HomeViewModel = .init()) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+    
+    
     let greet = Greeting().greeting()
     
     var body: some View {
-        VStack{
-            Spacer()
+        ZStack{
+            NavigationLink( destination: FeedScreen(), isActive: $viewModel.shouldNavigateToFeed ){ EmptyView() }
             
-            heading()
-            
-            Spacer()
-            
-            actions()
-            
+            VStack{
+                Spacer()
+                
+                heading()
+                
+                Spacer()
+                
+                actions()
+            }
         }
     }
     
@@ -28,36 +39,28 @@ struct HomeScreen: View {
     func actions(  ) -> some View {
         VStack{
             
-            Button("REST Requests" ) {
-                print("Button pressed")
-            }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.yellow.cornerRadius(8))
+            Button("REST Requests", action: viewModel.navigateToFeed)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.yellow.cornerRadius(8))
             
             
-            Button("Socket Requests" ) {
-                print("Button pressed")
-            }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.yellow.cornerRadius(8))
+            Button("Socket Requests", action: viewModel.navigateToFeed )
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.yellow.cornerRadius(8))
             
             
-            Button("Server Sent Events" ) {
-                print("Button pressed")
-            }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.yellow.cornerRadius(8))
+            Button("Server Sent Events", action: viewModel.navigateToFeed )
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.yellow.cornerRadius(8))
             
             
-            Button("GraphQl Requests" ) {
-                print("Button pressed")
-            }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.yellow.cornerRadius(8))
+            Button("GraphQl Requests", action: viewModel.navigateToFeed)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.yellow.cornerRadius(8))
             
         }
         .padding()
