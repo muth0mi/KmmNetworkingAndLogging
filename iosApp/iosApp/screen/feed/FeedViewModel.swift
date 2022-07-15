@@ -3,12 +3,13 @@ import shared
 
 class FeedViewModel : ObservableObject {
     
-    init(){
+    var feedRepository : FeedRepository
+
+    init(feedRepository: FeedRepository = .init() ){
+        self.feedRepository = feedRepository
         self.refreshFeedItems()
     }
-    
-    let feedRepository = FeedRepository()
-    
+        
     
     @Published var feedItems : [FeedItem] = []
     
@@ -17,5 +18,12 @@ class FeedViewModel : ObservableObject {
             self.feedItems = self.feedRepository.getFeedItems()
         }
         
+    }
+    
+    
+    @Published var showingNewSheet = false
+    
+    func setShowingNewSheet( showing: Bool = true) -> Void  {
+         showingNewSheet = showing
     }
 }

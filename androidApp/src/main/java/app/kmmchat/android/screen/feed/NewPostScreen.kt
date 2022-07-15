@@ -21,9 +21,9 @@ internal fun NewPostScreen(
 ) {
 
     if (viewModel.postSent.value) {
-        onDismiss()
-        viewModel.setPostSentSuccessfully(false)
         viewModel.setErrorMessage(null)
+        viewModel.setPostSentSuccessfully(false)
+        onDismiss()
     }
 
     AlertDialog(

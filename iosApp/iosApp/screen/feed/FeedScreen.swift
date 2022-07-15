@@ -20,6 +20,12 @@ struct FeedScreen: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{ ToolbarItem(placement: .principal) { appBar().padding([.trailing], 30)} }
+        .sheet(
+            isPresented: $viewModel.showingNewSheet,
+            onDismiss: {viewModel.setShowingNewSheet(showing: false)}
+        ){
+            NewPostScreen( onDismiss: {viewModel.setShowingNewSheet(showing: false)} )
+        }
     }
     
     func appBar( ) -> some View  {
@@ -40,9 +46,7 @@ struct FeedScreen: View {
             Spacer()
             HStack {
                 Spacer()
-                Button("New Post"                ){
-                    
-                }
+                Button("New Post"){ viewModel.setShowingNewSheet() }
                 .padding()
                 .background(Color.yellow.cornerRadius(8))
                 .padding([.bottom, .trailing], 20)

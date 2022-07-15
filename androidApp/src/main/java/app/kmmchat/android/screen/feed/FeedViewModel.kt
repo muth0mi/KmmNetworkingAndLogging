@@ -39,7 +39,6 @@ class FeedViewModel(
 
     fun refreshFeedItems() = viewModelScope.launch {
         refreshingFeedItems.value = true
-        delay(2500)
         feedItems.value = feedRepository.getFeedItems()
         refreshingFeedItems.value = false
     }

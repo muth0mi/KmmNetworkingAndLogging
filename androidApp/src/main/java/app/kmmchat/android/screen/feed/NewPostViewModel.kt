@@ -38,9 +38,7 @@ class NewPostViewModel(
 
     fun postNewFeed() = viewModelScope.launch {
         setErrorMessage(null)
-
         postingFeed.value = true
-        delay(2000)
         feedRepository.postToFeed(newPostText.value)
         if (Random.nextBoolean()) {
             setPostSentSuccessfully(true)
