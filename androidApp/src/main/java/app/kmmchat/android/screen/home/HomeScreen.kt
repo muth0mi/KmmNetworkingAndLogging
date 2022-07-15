@@ -8,13 +8,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import app.kmmchat.android.Screens
 import app.kmmchat.android.ui.theme.KMM_ChatTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun HomeScreen(navController: NavHostController) {
+internal fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = viewModel()) {
+
+    val navigationDestination =  viewModel.navigationDestination.value
+    if (navigationDestination != null){
+        navController.navigate(navigationDestination)
+        viewModel.navigateToDestination(null)
+    }
+
 
     Scaffold() {
         Column(
@@ -31,7 +40,7 @@ internal fun HomeScreen(navController: NavHostController) {
                     .padding(24.dp)
             )
 
-            ActionButtons(modifier = Modifier.padding(24.dp))
+            ActionButtons(viewModel, modifier = Modifier.padding(24.dp))
         }
     }
 }
@@ -53,27 +62,35 @@ private fun Heading(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun ActionButtons(modifier: Modifier = Modifier) {
+private fun ActionButtons(viewModel: HomeViewModel, modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(24.dp),
         modifier = modifier.fillMaxWidth()
     ) {
-        Button(onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth()) {
-            Text(text = "REST Requests")
-        }
+        Button(
+            content = { Text(text = "REST Requests") },
+            modifier = Modifier.fillMaxWidth(),
+            onClick = { viewModel.navigateToDestination(Screens.Feed.route) },
+        )
 
-        Button(onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth()) {
-            Text(text = "Socket Requests")
-        }
+        Button(
+            content = { Text(text = "Socket Requests") },
+            modifier = Modifier.fillMaxWidth(),
+            onClick = { viewModel.navigateToDestination(Screens.Feed.route) },
+        )
 
-        Button(onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth()) {
-            Text(text = "Server Sent Events")
-        }
+        Button(
+            content = { Text(text = "Server Sent Events") },
+            modifier = Modifier.fillMaxWidth(),
+            onClick = { viewModel.navigateToDestination(Screens.Feed.route) },
+        )
 
-        Button(onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth()) {
-            Text(text = "GraphQl Requests")
-        }
+        Button(
+            content = { Text(text = "GraphQl Requests") },
+            modifier = Modifier.fillMaxWidth(),
+            onClick = { viewModel.navigateToDestination(Screens.Feed.route) },
+        )
     }
 }
 

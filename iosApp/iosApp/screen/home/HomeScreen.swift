@@ -9,9 +9,7 @@ struct HomeScreen: View {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
-    
-    let greet = Greeting().greeting()
-    
+        
     var body: some View {
         ZStack{
             NavigationLink( destination: FeedScreen(), isActive: $viewModel.shouldNavigateToFeed ){ EmptyView() }
@@ -26,6 +24,7 @@ struct HomeScreen: View {
                 actions()
             }
         }
+        .navigationBarHidden(true)
     }
     
     func heading( ) -> some View {

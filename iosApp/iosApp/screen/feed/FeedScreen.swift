@@ -2,34 +2,29 @@ import SwiftUI
 import shared
 
 struct FeedScreen: View {
-    let greet = Greeting().greeting()
     
     var body: some View {
-        
-        
         ZStack{
             VStack{
-                appBar()
                 feedList()
             }
             floatingButton( )
         }
-        
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar{ ToolbarItem(placement: .principal) { appBar().padding([.trailing], 30)} }
     }
     
-    func appBar( ) -> some View {
+    func appBar( ) -> some View  {
         VStack{
-            
             Text("Feed")
-                .font(.largeTitle)
-                .multilineTextAlignment(.center)
-            
+                .font(.title2)
+                .bold()
+                .frame(maxWidth: .infinity)
+
             Text("Demonstrate REST Requests")
                 .font(.subheadline)
-                .multilineTextAlignment(.center)
-            
+                .frame(maxWidth: .infinity)
         }
-        
     }
     
     func floatingButton( ) -> some View {

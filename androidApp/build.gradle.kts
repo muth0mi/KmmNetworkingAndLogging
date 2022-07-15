@@ -44,10 +44,14 @@ dependencies {
     implementation(project(":shared"))
     // UI
     implementation("androidx.compose.ui:ui:1.1.1")
-    implementation("androidx.compose.material3:material3:1.0.0-alpha14")
     implementation("androidx.compose.ui:ui-tooling-preview:1.1.1")
+    implementation("androidx.compose.material3:material3:1.0.0-alpha14")
+    implementation( "androidx.compose.material:material-icons-extended:1.1.1")
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.5.0")
+    // Viewmodels
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0")
+
 
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.1.1")
     debugImplementation("androidx.compose.ui:ui-tooling:1.1.1")

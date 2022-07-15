@@ -2,6 +2,8 @@ package app.kmmchat.android.screen.feed
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,13 +14,27 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import app.kmmchat.android.ui.theme.KMM_ChatTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun FeedScreen(navController: NavHostController) {
+internal fun FeedScreen(navController: NavHostController, viewModel: FeedViewModel = viewModel()) {
+
+    val navigationBack = viewModel.navigateBack.value
+    if (navigationBack) {
+        navController.navigateUp()
+        viewModel.navigateToLastScreen(false)
+    }
+
+    val navigationDestination = viewModel.navigationDestination.value
+    if (navigationDestination != null) {
+        navController.navigate(navigationDestination)
+        viewModel.navigateToDestination(null)
+    }
 
     Scaffold(
-        topBar = { AppBar() },
+        topBar = { AppBar(viewModel) },
         floatingActionButton = { Fab() }
     ) {
         Column(
@@ -34,9 +50,15 @@ internal fun FeedScreen(navController: NavHostController) {
 }
 
 @Composable
-private fun AppBar(modifier: Modifier = Modifier) {
+private fun AppBar(viewModel: FeedViewModel, modifier: Modifier = Modifier) {
     CenterAlignedTopAppBar(
-        modifier = modifier,
+        modifier = modifier ,
+        navigationIcon = {
+            IconButton(
+                content = { Icon(Icons.Default.ArrowBack, null) },
+                onClick = { viewModel.navigateToLastScreen() }
+            )
+        },
         title = {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
@@ -78,6 +100,6 @@ private fun FeedList(modifier: Modifier = Modifier) {
 @Composable
 private fun HomeScreenPreview() {
     KMM_ChatTheme {
-        FeedScreen(rememberNavController( ))
+        FeedScreen(rememberNavController())
     }
 }
