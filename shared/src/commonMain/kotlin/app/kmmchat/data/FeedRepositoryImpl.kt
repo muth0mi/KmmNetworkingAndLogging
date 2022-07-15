@@ -1,33 +1,19 @@
 package app.kmmchat.data
 
-import app.kmmchat.FeedItem
-import app.kmmchat.FeedRepository
-import kotlin.random.Random
+import app.kmmchat.domain.FeedItem
+import app.kmmchat.domain.FeedRepository
 
-class FeedRepositoryImpl : FeedRepository {
-
-//    override suspend fun getUserWithPhoneNumber(countryCode: Int, phoneNumber: Int): User {
-//        val userDto =  feedApi.findUserWithPhoneNumber(countryCode, phoneNumber)
-//        return User(id = userDto.id)
-//    }
+class FeedRepositoryImpl(
+    private val feedApi: FeedApi = FeedApi()
+) : FeedRepository {
 
     @Throws(Exception::class)
     override suspend fun getFeedItems(): List<FeedItem> {
-        if (Random.nextBoolean()) {
-            throw Exception("Awww...")
-        }
-
-        return listOf(
-            FeedItem("A", "b"),
-            FeedItem("B", "c"),
-            FeedItem("C", "a"),
-        )
+        return feedApi.getFeeds().map { FeedItem(post = it.body, author = it.title) }
     }
 
     @Throws(Exception::class)
     override suspend fun postToFeed(post: String) {
-        if (Random.nextBoolean()) {
-            throw Exception("Awww...")
-        }
+        return feedApi.addFeed(post, "author 1")
     }
 }

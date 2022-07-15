@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google()
@@ -9,3 +11,4 @@ pluginManagement {
 rootProject.name = "KMM_Chat"
 include(":androidApp")
 include(":shared")
+include(":networking:rest")
