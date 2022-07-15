@@ -8,7 +8,7 @@ class NewPostViewModel : ObservableObject {
     init(feedRepository: FeedRepository = .init() ){
         self.feedRepository = feedRepository
     }
-
+    
     
     @Published var newPostText = ""
     
@@ -17,16 +17,15 @@ class NewPostViewModel : ObservableObject {
     @Published var error : String? = nil
     
     func postNewFeed(onSuccess: @escaping () -> Void) -> Void  {
-        DispatchQueue.main.async {
-            self.error = nil
-            self.postingFeed = true
-            self.feedRepository.postToFeed(post: self.newPostText)
-            if (Bool.random()) {
-                onSuccess()
-            } else {
-                self.error =  "Some Error"
-            }
+        self.error = nil
+        self.postingFeed = true
+        self.feedRepository.postToFeed(post: self.newPostText) { exception in
             self.postingFeed = false
+            if let error = exception?.localizedDescription  {
+                self.error =  error
+            } else {
+                onSuccess()
+            }
         }
     }
     

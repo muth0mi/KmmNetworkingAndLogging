@@ -1,8 +1,18 @@
 package app.kmmchat
 
+import kotlin.coroutines.CoroutineContext
+import kotlin.random.Random
+//import kotlinx.coroutines.delay
+
 class FeedRepository {
 
-    fun getFeedItems(): List<FeedItem> {
+    @Throws(Exception::class)
+     suspend fun getFeedItems(): List<FeedItem> {
+//        delay(3000)
+        if (Random.nextBoolean()){
+            throw Exception("Awww...")
+        }
+
         return listOf(
             FeedItem("A", "b"),
             FeedItem("B", "c"),
@@ -10,6 +20,11 @@ class FeedRepository {
         )
     }
 
-    fun postToFeed(post:  String) {
+    @Throws(Exception::class)
+  suspend  fun postToFeed(post: String) {
+        //        delay(3000)
+        if (Random.nextBoolean()){
+            throw Exception("Awww...")
+        }
     }
 }

@@ -4,26 +4,33 @@ import shared
 class FeedViewModel : ObservableObject {
     
     var feedRepository : FeedRepository
-
+    
     init(feedRepository: FeedRepository = .init() ){
         self.feedRepository = feedRepository
         self.refreshFeedItems()
     }
-        
+    
+    
+    @Published var error : String? = nil
     
     @Published var feedItems : [FeedItem] = []
     
     func refreshFeedItems()   -> Void  {
-        DispatchQueue.main.async {
-            self.feedItems = self.feedRepository.getFeedItems()
+        self.error = nil
+        self.feedRepository.getFeedItems () { data, exception  in
+            if let feedItems = data {
+                self.feedItems = feedItems
+            }
+            if let error = exception?.localizedDescription {
+                self.error =  error
+            }
         }
-        
     }
     
     
     @Published var showingNewSheet = false
     
     func setShowingNewSheet( showing: Bool = true) -> Void  {
-         showingNewSheet = showing
+        showingNewSheet = showing
     }
 }

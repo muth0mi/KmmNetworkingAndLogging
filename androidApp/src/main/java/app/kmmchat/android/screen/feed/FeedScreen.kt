@@ -47,7 +47,7 @@ internal fun FeedScreen(navController: NavHostController, viewModel: FeedViewMod
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween,
+            verticalArrangement = Arrangement.Top,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
@@ -59,6 +59,9 @@ internal fun FeedScreen(navController: NavHostController, viewModel: FeedViewMod
                     color = MaterialTheme.colorScheme.error,
                     modifier = Modifier.padding(24.dp)
                 )
+
+                Button(content = { Text("Retry") }, onClick = { viewModel.refreshFeedItems() })
+
             } else {
                 FeedList(viewModel, modifier = Modifier.padding(12.dp))
             }

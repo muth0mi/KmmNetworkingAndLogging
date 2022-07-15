@@ -14,7 +14,21 @@ struct FeedScreen: View {
     var body: some View {
         ZStack{
             VStack{
-                feedList()
+                if viewModel.error != nil {
+                    VStack{
+                        Text(viewModel.error ?? "")
+                            .font(.title2)
+                            .bold()
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                        
+                        Button("Retry", action: {viewModel.refreshFeedItems()})
+                            .padding()
+                    }
+                }
+                else {
+                    feedList()
+                }
             }
             floatingButton( )
         }
@@ -47,10 +61,10 @@ struct FeedScreen: View {
             HStack {
                 Spacer()
                 Button("New Post"){ viewModel.setShowingNewSheet() }
-                .padding()
-                .background(Color.yellow.cornerRadius(8))
-                .padding([.bottom, .trailing], 20)
-                .shadow(color: .black.opacity(0.3),      radius: 3, x: 3, y: 3)
+                    .padding()
+                    .background(Color.yellow.cornerRadius(8))
+                    .padding([.bottom, .trailing], 20)
+                    .shadow(color: .black.opacity(0.3),      radius: 3, x: 3, y: 3)
             }
         }
         
