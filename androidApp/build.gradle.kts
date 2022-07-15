@@ -47,6 +47,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:1.1.1")
     implementation("androidx.compose.material3:material3:1.0.0-alpha14")
     implementation( "androidx.compose.material:material-icons-extended:1.1.1")
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.24.13-rc")
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.5.0")
     // Viewmodels

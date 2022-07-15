@@ -2,6 +2,7 @@ package app.kmmchat.android.screen.feed
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
@@ -15,6 +16,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import app.kmmchat.android.ui.theme.KMM_ChatTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import app.kmmchat.FeedItem
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,7 +48,7 @@ internal fun FeedScreen(navController: NavHostController, viewModel: FeedViewMod
                 .fillMaxSize()
                 .padding(it)
         ) {
-            FeedList(modifier = Modifier.padding(24.dp))
+            FeedList(viewModel, modifier = Modifier.padding(12.dp))
         }
     }
 }
@@ -52,7 +56,7 @@ internal fun FeedScreen(navController: NavHostController, viewModel: FeedViewMod
 @Composable
 private fun AppBar(viewModel: FeedViewModel, modifier: Modifier = Modifier) {
     CenterAlignedTopAppBar(
-        modifier = modifier ,
+        modifier = modifier,
         navigationIcon = {
             IconButton(
                 content = { Icon(Icons.Default.ArrowBack, null) },
@@ -90,9 +94,34 @@ private fun Fab(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun FeedList(modifier: Modifier = Modifier) {
-    LazyColumn(modifier = modifier.fillMaxWidth()) {
+private fun FeedList(viewModel: FeedViewModel, modifier: Modifier = Modifier) {
 
+    SwipeRefresh(
+        modifier = modifier.fillMaxSize(),
+        state = rememberSwipeRefreshState(viewModel.refreshingFeedItems.value),
+        onRefresh = { viewModel.refreshFeedItems() },
+    ) {
+        LazyColumn(modifier = modifier.fillMaxWidth()) {
+            item { Spacer(modifier = Modifier.height(8.dp)) }
+            items(viewModel.feedItems.value) { feedItem ->
+                FeedRow(feedItem, modifier = Modifier.padding(vertical = 8.dp))
+            }
+            item { Spacer(modifier = Modifier.height(8.dp)) }
+        }
+    }
+}
+
+@Composable
+private fun FeedRow(feedItem: FeedItem, modifier: Modifier = Modifier) {
+    Surface(
+        tonalElevation = 4.dp,
+        shape = MaterialTheme.shapes.medium,
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Column(modifier = Modifier.fillMaxSize().padding(8.dp)) {
+            Text(text = feedItem.post)
+            Text(text = feedItem.author, style = MaterialTheme.typography.labelSmall)
+        }
     }
 }
 
