@@ -25,13 +25,20 @@ class FeedViewModel : ViewModel() {
     }
 
 
+    var newPostAlertVisible: MutableState<Boolean> = mutableStateOf(false)
+
+    fun setNewPostAlertVisible(creating: Boolean = true) {
+        newPostAlertVisible.value = creating
+    }
+
+
     var feedItems: MutableState<List<FeedItem>> = mutableStateOf(emptyList())
     var refreshingFeedItems: MutableState<Boolean> = mutableStateOf(false)
 
     fun refreshFeedItems() = viewModelScope.launch {
         refreshingFeedItems.value = true
         delay(2500)
-        feedItems.value =  FeedRepository().getFeedItems()
+        feedItems.value = FeedRepository().getFeedItems()
         refreshingFeedItems.value = false
     }
 

@@ -37,9 +37,13 @@ internal fun FeedScreen(navController: NavHostController, viewModel: FeedViewMod
         viewModel.navigateToDestination(null)
     }
 
+    if (viewModel.newPostAlertVisible.value) {
+        NewPostScreen(onDismiss = { viewModel.setNewPostAlertVisible(false) })
+    }
+
     Scaffold(
         topBar = { AppBar(viewModel) },
-        floatingActionButton = { Fab() }
+        floatingActionButton = { Fab(viewModel) }
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -84,10 +88,10 @@ private fun AppBar(viewModel: FeedViewModel, modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun Fab(modifier: Modifier = Modifier) {
+private fun Fab(viewModel: FeedViewModel, modifier: Modifier = Modifier) {
     ExtendedFloatingActionButton(
         modifier = modifier,
-        onClick = {}
+        onClick = { viewModel.setNewPostAlertVisible() }
     ) {
         Text(text = "New Post")
     }
@@ -118,7 +122,11 @@ private fun FeedRow(feedItem: FeedItem, modifier: Modifier = Modifier) {
         shape = MaterialTheme.shapes.medium,
         modifier = modifier.fillMaxWidth()
     ) {
-        Column(modifier = Modifier.fillMaxSize().padding(8.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
+        ) {
             Text(text = feedItem.post)
             Text(text = feedItem.author, style = MaterialTheme.typography.labelSmall)
         }
@@ -127,7 +135,7 @@ private fun FeedRow(feedItem: FeedItem, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-private fun HomeScreenPreview() {
+private fun Preview() {
     KMM_ChatTheme {
         FeedScreen(rememberNavController())
     }

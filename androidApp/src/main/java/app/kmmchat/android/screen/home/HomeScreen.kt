@@ -18,8 +18,8 @@ import app.kmmchat.android.ui.theme.KMM_ChatTheme
 @Composable
 internal fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = viewModel()) {
 
-    val navigationDestination =  viewModel.navigationDestination.value
-    if (navigationDestination != null){
+    val navigationDestination = viewModel.navigationDestination.value
+    if (navigationDestination != null) {
         navController.navigate(navigationDestination)
         viewModel.navigateToDestination(null)
     }
@@ -96,7 +96,7 @@ private fun ActionButtons(viewModel: HomeViewModel, modifier: Modifier = Modifie
 
 @Preview(showBackground = true)
 @Composable
-private fun HomeScreenPreview() {
+private fun Preview() {
     KMM_ChatTheme {
         HomeScreen(rememberNavController())
     }
