@@ -5,7 +5,7 @@ import app.kmmchat.networking.rest.RestNetworkingClient
 
 class FeedApi : RestNetworkingClient() {
 
-    private val baseUrl = "https://" + Utilities.localHostUrl + ":8080/rest/posts"
+    private val baseUrl = "http://" + Utilities.localHostUrl + ":8080/rest/posts"
 
     suspend fun getFeeds(): List<FeedDto> {
         return get<List<FeedDto>>(baseUrl + "")
