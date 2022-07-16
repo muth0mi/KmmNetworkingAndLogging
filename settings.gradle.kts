@@ -12,3 +12,4 @@ rootProject.name = "KMM_Chat"
 include(":androidApp")
 include(":shared")
 include(":networking:rest")
+include(":networking:socket")
