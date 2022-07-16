@@ -4,12 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import app.kmmchat.android.ui.theme.KMM_ChatTheme
-import app.kmmchat.logging.kermit
+import app.kmmchat.logging.Logger
 
 internal class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        kermit.withTag("MainActivity").i { "Activity Started" }
+        Logger.i("Activity Started", "MainActivity")
 
         super.onCreate(savedInstanceState)
         setContent {

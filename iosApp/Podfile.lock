@@ -1,16 +1,21 @@
 PODS:
+  - logging (1.0)
   - shared (1.0)
 
 DEPENDENCIES:
+  - logging (from `../logging`)
   - shared (from `../shared`)
 
 EXTERNAL SOURCES:
+  logging:
+    :path: "../logging"
   shared:
     :path: "../shared"
 
 SPEC CHECKSUMS:
+  logging: a80c9fdc30c19f2db0aea22cf813cd67c141d1d6
   shared: 07cac7993e4f05eda6b76f3a213b070947c3b79f
 
-PODFILE CHECKSUM: f282da88f39e69507b0a255187c8a6b644477756
+PODFILE CHECKSUM: 162e048e95efe1755e50aa56a9ca9716da411a58
 
 COCOAPODS: 1.11.2
