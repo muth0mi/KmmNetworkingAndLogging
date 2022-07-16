@@ -1,10 +1,11 @@
 package app.kmmchat.feed.data
 
+import app.kmmchat.Utilities
 import app.kmmchat.networking.rest.RestNetworkingClient
 
 class FeedApi : RestNetworkingClient() {
 
-    private val baseUrl = "https://0e69-105-163-22-159.eu.ngrok.io/rest/posts"
+    private val baseUrl = "https://" + Utilities.localHostUrl + ":8080/rest/posts"
 
     suspend fun getFeeds(): List<FeedDto> {
         return get<List<FeedDto>>(baseUrl + "")

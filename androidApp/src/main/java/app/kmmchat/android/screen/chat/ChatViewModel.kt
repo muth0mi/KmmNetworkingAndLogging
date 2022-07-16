@@ -42,7 +42,8 @@ class ChatViewModel(
 
 
     private fun connect() = viewModelScope.launch {
-        chatRepository.openConnection("oly")
+        val usernames = listOf("Alpha", "Beta", "Cupcake", "Donut", "ICS", "Kitkat", "Oreo")
+        chatRepository.openConnection(usernames.random())
         kotlin.runCatching {
             chatRepository.listenMessages()
                 .onEach { message ->
