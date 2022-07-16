@@ -62,9 +62,10 @@ internal fun FeedScreen(navController: NavHostController, viewModel: FeedViewMod
 
                 Button(content = { Text("Retry") }, onClick = { viewModel.refreshFeedItems() })
 
-            } else {
-                FeedList(viewModel, modifier = Modifier.padding(12.dp))
             }
+
+            FeedList(viewModel, modifier = Modifier.padding(12.dp))
+
         }
     }
 }
@@ -117,7 +118,7 @@ private fun FeedList(viewModel: FeedViewModel, modifier: Modifier = Modifier) {
         state = rememberSwipeRefreshState(viewModel.refreshingFeedItems.value),
         onRefresh = { viewModel.refreshFeedItems() },
     ) {
-        LazyColumn(modifier = modifier.fillMaxWidth()) {
+        LazyColumn(modifier = modifier.fillMaxSize()) {
             item { Spacer(modifier = Modifier.height(8.dp)) }
             items(viewModel.feedItems.value) { feedItem ->
                 FeedRow(feedItem, modifier = Modifier.padding(vertical = 8.dp))
@@ -139,8 +140,11 @@ private fun FeedRow(feedItem: FeedItem, modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .padding(8.dp)
         ) {
-            Text(text = feedItem.post)
             Text(text = feedItem.author, style = MaterialTheme.typography.labelSmall)
+            Text(
+                text = feedItem.post, style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.padding(top = 8.dp)
+            )
         }
     }
 }

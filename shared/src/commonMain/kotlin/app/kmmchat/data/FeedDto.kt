@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class FeedDto(
     val id: Int = 0,
-    val title: String,
-    val body: String,
+    val post: String,
+    val author: String,
 )

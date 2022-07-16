@@ -79,15 +79,15 @@ struct FeedScreen: View {
     
     func feedRow(feedItem: FeedItem) -> some View{
         VStack{
-            Text(feedItem.post)
-                .font(.title2)
-                .bold()
-                .frame(maxWidth: .infinity)
-            
             Text(feedItem.author)
                 .font(.subheadline)
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            Text(feedItem.post)
+                .font(.title2)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .padding()
     }
 }
 
