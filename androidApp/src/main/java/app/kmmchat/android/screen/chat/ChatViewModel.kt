@@ -5,9 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.kmmchat.chat.domain.ChatMessage
-import app.kmmchat.domain.FeedItem
-import app.kmmchat.domain.FeedRepository
-import app.kmmchat.data.FeedRepositoryImpl
+import app.kmmchat.feed.domain.FeedRepository
+import app.kmmchat.feed.data.FeedRepositoryImpl
 import kotlinx.coroutines.launch
 
 class ChatViewModel(

@@ -1,4 +1,4 @@
-package app.kmmchat.data
+package app.kmmchat.feed.data
 
 import kotlinx.serialization.Serializable
 
