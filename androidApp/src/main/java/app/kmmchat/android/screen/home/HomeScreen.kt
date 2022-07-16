@@ -77,7 +77,7 @@ private fun ActionButtons(viewModel: HomeViewModel, modifier: Modifier = Modifie
         Button(
             content = { Text(text = "Socket Requests") },
             modifier = Modifier.fillMaxWidth(),
-            onClick = { viewModel.navigateToDestination(Screens.Feed.route) },
+            onClick = { viewModel.navigateToDestination(Screens.Chat.route) },
         )
 
         Button(
