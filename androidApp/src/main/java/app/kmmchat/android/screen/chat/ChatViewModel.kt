@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import app.kmmchat.chat.data.ChatRepositoryImpl
 import app.kmmchat.chat.domain.ChatMessage
 import app.kmmchat.chat.domain.ChatRepository
+import app.kmmchat.logging.Logger
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -33,6 +34,8 @@ class ChatViewModel(
     var error: MutableState<String?> = mutableStateOf(null)
     var sendingMessage: MutableState<Boolean> = mutableStateOf(false)
     fun sendMessage() = viewModelScope.launch {
+        Logger.i("Sending message: message -> " + newMessage.value, "ChatViewModel")
+
         error.value = null
         sendingMessage.value = true
         kotlin.runCatching {
@@ -45,6 +48,8 @@ class ChatViewModel(
 
 
     private fun connect() = viewModelScope.launch {
+        Logger.i("Listening for new messages", "ChatViewModel")
+
         val usernames = listOf("Alpha", "Beta", "Cupcake", "Donut", "ICS", "Kitkat", "Oreo")
         chatRepository.openConnection(usernames.random())
         kotlin.runCatching {
@@ -53,6 +58,7 @@ class ChatViewModel(
                     messages.value = messages.value.plus(message)
                 }.launchIn(viewModelScope)
         }.onFailure {
+            Logger.w(it.localizedMessage.orEmpty(), "ChatViewModel")
             println("Failed to listen to messages: " + it.localizedMessage)
         }
     }
@@ -62,6 +68,7 @@ class ChatViewModel(
     }
 
     init {
+        Logger.i("Chat viewmodel launched Started", "ChatViewModel")
         connect()
     }
 

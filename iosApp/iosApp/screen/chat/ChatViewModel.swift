@@ -1,12 +1,19 @@
 import Foundation
 import shared
+import logging
 
 class ChatViewModel : ObservableObject {
+    
+    var  logger : Logger
     
     var chatRepository : ChatRepository
     
     init(chatRepository: ChatRepository = ChatRepositoryImpl.init(chatApi: ChatApi()) ){
         self.chatRepository = chatRepository
+        
+        self.logger = Logger.init()
+        self.logger.i(message: "ChatViewModel Launched", tag: "ChatViewModel" )
+        
         self.initiateConnection()
     }
     
@@ -19,7 +26,7 @@ class ChatViewModel : ObservableObject {
                 return
             }
             DispatchQueue.main.async {
-            self.observeMessages()
+                self.observeMessages()
             }
         }
     }
@@ -27,6 +34,9 @@ class ChatViewModel : ObservableObject {
     @Published var error : String? = nil
     
     func observeMessages(){
+        self.logger.i(message: "Listening for new messages", tag: "ChatViewModel" )
+        
+        
         self.chatRepository.listenMessagesIos { chatMessage in
             self.messages.append( chatMessage)
         } completionHandler: {  exception  in
@@ -42,6 +52,9 @@ class ChatViewModel : ObservableObject {
     @Published var sendingMessage : Bool = false
     
     func sendMessage()   -> Void  {
+        self.logger.i(message: "Sending message: message -> " + newMessage, tag: "ChatViewModel" )
+        
+        
         self.error = nil
         self.sendingMessage = true
         self.chatRepository.sendMessage(message: newMessage) { exception  in
