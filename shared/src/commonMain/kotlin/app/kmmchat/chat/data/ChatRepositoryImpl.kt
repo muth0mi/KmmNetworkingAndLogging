@@ -3,6 +3,7 @@ package app.kmmchat.chat.data
 import app.kmmchat.chat.domain.ChatMessage
 import app.kmmchat.chat.domain.ChatRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 
 class ChatRepositoryImpl(
@@ -21,6 +22,12 @@ class ChatRepositoryImpl(
     override suspend fun listenMessages(): Flow<ChatMessage> {
         return chatApi.receiveMessage().map {
             ChatMessage(message = it.message, sender = it.from)
+        }
+    }
+
+    override suspend fun listenMessagesIos(onEach: (ChatMessage) -> Unit) {
+        listenMessages().collectLatest {
+            onEach(it)
         }
     }
 

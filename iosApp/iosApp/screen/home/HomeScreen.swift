@@ -13,7 +13,8 @@ struct HomeScreen: View {
     var body: some View {
         ZStack{
             NavigationLink( destination: FeedScreen(), isActive: $viewModel.shouldNavigateToFeed ){ EmptyView() }
-            
+            NavigationLink( destination: ChatScreen(), isActive: $viewModel.shouldNavigateToChat ){ EmptyView() }
+
             VStack{
                 Spacer()
                 
@@ -44,7 +45,7 @@ struct HomeScreen: View {
                 .background(Color.yellow.cornerRadius(8))
             
             
-            Button("Socket Requests", action: viewModel.navigateToFeed )
+            Button("Socket Requests", action: viewModel.navigateToChat )
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(Color.yellow.cornerRadius(8))

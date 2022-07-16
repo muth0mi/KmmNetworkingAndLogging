@@ -14,5 +14,8 @@ interface ChatRepository {
     suspend fun listenMessages(): Flow<ChatMessage>
 
     @Throws(Exception::class)
+    suspend fun listenMessagesIos(onEach:(ChatMessage)->Unit)
+
+    @Throws(Exception::class)
     suspend fun sendMessage(message: String)
 }

@@ -21,23 +21,26 @@ class ChatViewModel(
     }
 
 
+    var messages: MutableState<List<ChatMessage>> = mutableStateOf(emptyList())
+
+
     var newMessage: MutableState<String> = mutableStateOf("")
     fun setNewMessage(message: String) {
         newMessage.value = message
     }
 
 
-    var messages: MutableState<List<ChatMessage>> = mutableStateOf(emptyList())
-    var sendingPost: MutableState<Boolean> = mutableStateOf(false)
-    var sendingPostError: MutableState<String?> = mutableStateOf(null)
+    var error: MutableState<String?> = mutableStateOf(null)
+    var sendingMessage: MutableState<Boolean> = mutableStateOf(false)
     fun sendMessage() = viewModelScope.launch {
-        sendingPost.value = true
+        error.value = null
+        sendingMessage.value = true
         kotlin.runCatching {
             chatRepository.sendMessage(newMessage.value)
         }.onFailure {
-            sendingPostError.value = it.localizedMessage
+            error.value = it.localizedMessage
         }
-        sendingPost.value = false
+        sendingMessage.value = false
     }
 
 
