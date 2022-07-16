@@ -36,7 +36,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(projects.networking.rest)
-                implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
             }
         }
