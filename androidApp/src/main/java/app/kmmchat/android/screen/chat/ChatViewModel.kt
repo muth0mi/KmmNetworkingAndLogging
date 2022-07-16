@@ -4,13 +4,15 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.kmmchat.chat.data.ChatRepositoryImpl
 import app.kmmchat.chat.domain.ChatMessage
-import app.kmmchat.feed.domain.FeedRepository
-import app.kmmchat.feed.data.FeedRepositoryImpl
+import app.kmmchat.chat.domain.ChatRepository
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class ChatViewModel(
-    private val feedRepository: FeedRepository = FeedRepositoryImpl()
+    private val chatRepository: ChatRepository = ChatRepositoryImpl()
 ) : ViewModel() {
 
     var navigateBack: MutableState<Boolean> = mutableStateOf(false)
@@ -31,14 +33,37 @@ class ChatViewModel(
     fun sendMessage() = viewModelScope.launch {
         sendingPost.value = true
         kotlin.runCatching {
-            feedRepository.getFeedItems()
-        }.onSuccess {
-            messages.value = messages.value.plus(ChatMessage("dd",""))
+            chatRepository.sendMessage(newMessage.value)
         }.onFailure {
             sendingPostError.value = it.localizedMessage
         }
         sendingPost.value = false
     }
 
+
+    private fun connect() = viewModelScope.launch {
+        chatRepository.openConnection("oly")
+        kotlin.runCatching {
+            chatRepository.listenMessages()
+                .onEach { message ->
+                    messages.value = messages.value.plus(message)
+                }.launchIn(viewModelScope)
+        }.onFailure {
+            println("Failed to listen to messages: " + it.localizedMessage)
+        }
+    }
+
+    private fun disconnect() = viewModelScope.launch {
+        chatRepository.closeConnection()
+    }
+
+    init {
+        connect()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disconnect()
+    }
 
 }

@@ -36,6 +36,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(projects.networking.rest)
+                implementation(projects.networking.socket)
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
             }
         }
