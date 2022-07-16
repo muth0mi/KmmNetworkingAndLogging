@@ -1,8 +1,8 @@
 package app.kmmchat.feed.data
 
-import app.kmmchat.networking.rest.NetworkingClient
+import app.kmmchat.networking.rest.RestNetworkingClient
 
-class FeedApi : NetworkingClient() {
+class FeedApi : RestNetworkingClient() {
 
     private val baseUrl = "https://0e69-105-163-22-159.eu.ngrok.io/rest/posts"
 

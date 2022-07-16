@@ -12,7 +12,7 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 
-open class NetworkingClient(engine: HttpClientEngine = NetworkingEngine.getEngine()) {
+open class RestNetworkingClient(engine: HttpClientEngine = NetworkingEngine.getEngine()) {
 
     val client = HttpClient(engine) {
         expectSuccess = true
