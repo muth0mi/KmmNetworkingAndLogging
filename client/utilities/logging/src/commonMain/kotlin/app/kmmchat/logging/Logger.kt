@@ -4,14 +4,18 @@ import co.touchlab.kermit.Kermit
 
 object Logger {
 
-    private val  kermit = Kermit()
+    private val kermit = Kermit()
 
-    fun i(message: String, tag: String = "") {
-        kermit.withTag(tag).i { message }
+    fun v(message: String, tag: String = "") {
+        kermit.withTag(tag).v { message }
     }
 
     fun d(message: String, tag: String = "") {
         kermit.withTag(tag).d { message }
+    }
+
+    fun i(message: String, tag: String = "") {
+        kermit.withTag(tag).i { message }
     }
 
     fun w(message: String, tag: String = "") {

@@ -1,4 +1,4 @@
-package app.kmmchat.feed.domain
+package app.kmmchat.forum.domain
 
 interface FeedRepository {
 

@@ -1,7 +1,7 @@
-package app.kmmchat.feed.data
+package app.kmmchat.forum.data
 
-import app.kmmchat.feed.domain.FeedItem
-import app.kmmchat.feed.domain.FeedRepository
+import app.kmmchat.forum.domain.FeedItem
+import app.kmmchat.forum.domain.FeedRepository
 
 class FeedRepositoryImpl(
     private val feedApi: FeedApi = FeedApi()

@@ -4,8 +4,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.kmmchat.feed.domain.FeedRepository
-import app.kmmchat.feed.data.FeedRepositoryImpl
+import app.kmmchat.forum.data.FeedRepositoryImpl
+import app.kmmchat.forum.domain.FeedRepository
 import kotlinx.coroutines.launch
 
 class NewPostViewModel(

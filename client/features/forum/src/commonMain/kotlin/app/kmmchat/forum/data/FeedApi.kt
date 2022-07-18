@@ -1,4 +1,4 @@
-package app.kmmchat.feed.data
+package app.kmmchat.forum.data
 
 import app.kmmchat.networking.NetworkUtilities
 import app.kmmchat.networking.RestNetworkingClient
