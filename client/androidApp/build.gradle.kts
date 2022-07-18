@@ -41,8 +41,9 @@ android {
 }
 
 dependencies {
-    implementation(projects.shared)
-    implementation(projects.logging)
+    implementation(projects.features.forum)
+    implementation(projects.features.chat)
+    implementation(projects.utilities.logging)
     // UI
     implementation("androidx.compose.ui:ui:1.1.1")
     implementation("androidx.compose.ui:ui-tooling-preview:1.1.1")

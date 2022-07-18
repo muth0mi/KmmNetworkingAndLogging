@@ -1,5 +1,5 @@
 import Foundation
-import shared
+import chat
 import logging
 
 class ChatViewModel : ObservableObject {

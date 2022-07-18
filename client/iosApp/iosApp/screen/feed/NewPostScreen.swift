@@ -1,5 +1,5 @@
 import SwiftUI
-import shared
+import forum
 
 struct NewPostScreen: View {
     

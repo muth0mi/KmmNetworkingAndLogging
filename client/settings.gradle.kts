@@ -10,7 +10,9 @@ pluginManagement {
 
 rootProject.name = "KMM_Chat"
 include(":androidApp")
-include(":shared")
-include(":networking:rest")
-include(":networking:socket")
-include(":logging")
+
+include(":features:forum")
+include(":features:chat")
+
+include(":utilities:networking")
+include(":utilities:logging")
